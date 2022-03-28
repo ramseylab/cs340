@@ -319,5 +319,23 @@ which prints out:
 |  1 | Gemenon | 2800000000 | Old Gemenese | Oranu   |
 +----+---------+------------+--------------+---------+
 ```
-
-
+Now let's run the query that you are asked to run in the assignment:
+```
+mysql -e "select * from bsg_people"
+```
+which returns:
+```
++----+-----------+-----------+-----------+------+
+| id | fname     | lname     | homeworld | age  |
++----+-----------+-----------+-----------+------+
+|  1 | William   | Adama     |         3 |   61 |
+|  2 | Lee       | Adama     |         3 |   30 |
+|  3 | Laura     | Roslin    |         3 | NULL |
+|  4 | Kara      | Thrace    |         3 | NULL |
+|  5 | Gaius     | Baltar    |         3 | NULL |
+|  6 | Saul      | Tigh      |      NULL |   71 |
+|  7 | Karl      | Agathon   |         1 | NULL |
+|  8 | Galen     | Tyrol     |         1 |   32 |
+|  9 | Callandra | Henderson |      NULL | NULL |
++----+-----------+-----------+-----------+------+
+```
