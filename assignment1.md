@@ -1,4 +1,9 @@
+# An in-class demonstration of how to do Assignment&nbsp;1 for CS340
 
+## Stephen Ramsey
+## CS340, Spring 2022
+
+# Some documentation references you might find useful
 In this class, we will be using the MariaDB relational database management
 system. The definitive set of documentation for how to use MariaDB server is the
 [MariaDB Server Documentation website](https://mariadb.com/kb/en/documentation/);
@@ -9,6 +14,8 @@ that program is the
 in Section 4.5.1 of the MySQl documentation at mysql.com.  You'll also be making
 use of OpenSSH in this course; the definitive documentation for OpenSSH is the
 [OpenSSH Manual Pages](https://www.openssh.com/manual.html) at openssh.com.
+
+# Doing Assignment&nbsp;1, via the command-line interface (CLI) method
 
 In this tutorial, I will show you how to set things up so that you can ssh into
 the COE T.E.A.C.H. Linux servers and to connect (using the `mysql` client) to the
@@ -339,3 +346,27 @@ which returns:
 |  9 | Callandra | Henderson |      NULL | NULL |
 +----+-----------+-----------+-----------+------+
 ```
+
+# Doing Assignment&nbsp;1, using the phpMyAdmin method
+
+- Make sure you are on the OSU network (use VPN if you are not on the OSU network).
+
+- Download the `bsg_db.sql` file:
+
+```
+curl -L -s https://raw.githubusercontent.com/ramseylab/cs340/main/bsg_db.sql > bsg_db.sql
+```
+
+- With your web browser, navigate to [classmysql.engr.oregonstate.edu](https://classmysql.engr.oregonstate.edu)
+
+- Authenticate using your MariaDB username (like `cs340_ramseyst`) and your new password.
+
+- Click the "Databases" tab on the top-level row of tabs and select the `cs340_ramseyst` database
+
+- Click the "Import" tab on the top-level row of tabs and click the "Browse..." button. Select your local `bsg_db.sql` file and click the "Open" button. 
+
+- Click the "Query" tab on the top-level row of tabs and in the bottom text-box with "1" next to it, type
+```
+select * from bsg_people
+```
+
