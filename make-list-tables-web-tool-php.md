@@ -1,6 +1,6 @@
 # A simple web page that lists tables in your CS340 MariaDB database
 
-In this tutorial, I'll walk you thorugh how to make a simple web page with 
+In this tutorial, I'll walk you through how to make a simple web page with 
 server-side scripting to query a database (the `bsg_db.sql` database from 
 Assignment&nbsp;1) to find the names of all the tables in the database, and
 to print the results in a little HTML table. 
@@ -75,18 +75,6 @@ curl https://web.engr.oregonstate.edu/~ramseyset/info.php
 or by pointing your web browser to the same URL. You'll see that
 `web.engr.oregonstate.edu` is running PHP version 7.4.28.
 
-You'll first want to set things up so that PHP errors get displayed
-so you can debug what is going wrong, so user your editor to create
-a file `~/public_html/.htaccess`:
-```
-emacs -nw ~/public_html/.htaccess
-```
-and put the following code in it:
-```
-php_flag display_startup_errors on
-php_flag display_errors on
-php_flag html_errors on
-```
 Now, inside your editor, you want to make a web page, like this:
 ```
 <html>
@@ -104,7 +92,7 @@ Now, inside your editor, you want to make a web page, like this:
     $charset = 'utf8mb4';
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $opt = [
-        PDO::ATTR_ERRMODE => PDO::E'RRMODE_EXCEPTION,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
     ];
