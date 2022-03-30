@@ -104,7 +104,7 @@ Note that `character_set_system` is a read-only variable, so there is
 nothing that can be done about that; I think that just means that
 you can't have an emoji in a table name, or that kind of thing.
 To verify that it worked, do this:
-``
+```
 mysql -e "select default_character_set_name from information_schema.SCHEMATA where schema_name='cs340_ramseyst';"
 +----------------------------+
 | default_character_set_name |
