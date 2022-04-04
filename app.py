@@ -16,7 +16,7 @@ db_conn = MySQLdb.connect(config_info['host'],
                           config_info['password'],
                           config_info['database'])
 
-webapp = flask.Flask(__name__)
+webapp = flask.Flask(__name__, static_url_path='/static')
 
 @webapp.route('/')
 def get_tables():
@@ -25,7 +25,8 @@ def get_tables():
     cursor.execute('show tables;', ())
     for [table_name] in cursor.fetchall():
         res_html += f"<tr><td>{table_name}</td></tr>\n"
-    res_html += "</table>\n</body>\n</html>\n"
+    res_html += "</table>\n"
+    res_html += "<img src=\"/static/logo.ong\" />\n</body>\n</html>\n"
     return res_html
 ##get_tables = webapp.route('/')(get_tables)
 
