@@ -171,3 +171,25 @@ Once you are done with your testing, you can terminate your Flask application
 by going to the terminal session in which you started the Flask application
 and typing `<ctrl>-c` which will issue a SIGINT signal to the application.
 
+When you are ready to run your server for real, you can install `gunicorn`
+like this:
+```
+pip install gunicorn
+```
+Then (making sure that your current working directory is `~/cs340-flask`), run
+```
+~/venv/bin/gunicorn -w 4 -b 0.0.0.0:NNN -D app:webapp
+```
+and it will run in the background. To shut it down, use
+`ps axwf | less` and look for your specific TCP port number; it will
+look something like this:
+```
+18608 ?        S      0:00 /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:6550
+18611 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
+18612 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
+18614 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
+18615 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
+[
+```
+Kill the parent process (the top-level one shown, which has PID 18605 in this case)
+using `kill -9`.
