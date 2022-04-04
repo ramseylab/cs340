@@ -126,7 +126,7 @@ you don't have to leave a remote terminal session running long-term (leaving a
 remote terminal session running for a long time is not really practical because it
 can be terminated unexpectedly due to a transient network interruptation, and
 is also somewhat of a security anti-pattern). To run your Flask application in
-the background, use `gunicorn` as outlined in the 
+the background, you can use Green Unicorn (`gunicorn`) as outlined in the 
 [CS340 starter Flask app on GitHub](https://github.com/knightsamar/CS340_starter_flask_app).
 For the purpose of this simple tutorial, just leave your Flask application running
 in your remote terminal session. Now, for the next step, you will need to either
@@ -148,3 +148,7 @@ and you should see the following HTML output (rendered of course):
 </body>
 </html>
 ```
+Once you are done with your testing, you can terminate your Flask application
+by going to the terminal session in which you started the Flask application
+and typing `<ctrl>-c` which will issue a SIGINT signal to the application.
+
