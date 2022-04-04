@@ -3,7 +3,9 @@
 In this tutorial, I'll show you how to set up a toy Python/Flask
 web application that will query your CS340 MariaDB database
 to get the list of tables in the database, and to display the
-list in an HTML table.
+list in an HTML table. It will also display the OSU logo
+as an inline image, as an example of how we can serve static
+files (i.e., static content) through your Flask applicaiton.
 
 In all of the steps below, `ramseyst` should be understood to
 represent your ONID username.
@@ -49,9 +51,17 @@ Now install (from PyPI) the packages that you will need, which are `mysqlclient`
 ```
 pip install mysqlclient Flask
 ```
-Go into your `cs34--flask` directory:
+Go into your `cs34-flask` directory:
 ```
 cd cs340-flask
+```
+You'll need a subdirectory for static content; so make one (inside your `cs340-flask` directory):
+```
+mkdir -p static
+```
+And copy a little image file into the static folder, to test it out:
+```
+curl -L -s https://raw.githubusercontent.com/ramseylab/cs340/main/logo.png > static/logo.png
 ```
 Now, use your favorite text editor to create a file `app.py`,
 ```
@@ -73,7 +83,7 @@ db_conn = MySQLdb.connect(config_info['host'],
                           config_info['password'],
                           config_info['database'])
 
-webapp = flask.Flask(__name__)
+webapp = flask.Flask(__name__, static_url_path='/static')
 
 @webapp.route('/')
 def get_tables():
@@ -82,13 +92,16 @@ def get_tables():
     cursor.execute('show tables;', ())
     for [table_name] in cursor.fetchall():
         res_html += f"<tr><td>{table_name}</td></tr>\n"
-    res_html += "</table>\n</body>\n</html>\n"
+    res_html += "</table>\n"
+    res_html += "<img src=\"/static/logo.png\" />\n</body>\n</html>\n"
     return res_html
+##get_tables = webapp.route('/')(get_tables)
 ```
-Before we go any further, let's set up Flask to run in 
-"development" mode (the default is "production" mode),
-which will show an interactive traceback if an error occurs, 
-rather than "internal server error". 
+The last comment shows (in plain python syntax) what the somewhat
+mysterious-looking "decorator" directive `@webapp.route('/')` does.  Before we
+go any further, let's set up Flask to run in "development" mode (the default is
+"production" mode), which will show an interactive traceback if an error occurs,
+rather than "internal server error".
 ```
 setenv FLASK_ENV development
 ```
