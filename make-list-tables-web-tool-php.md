@@ -86,7 +86,7 @@ Now, inside your editor, you want to make a web page, like this:
     $host = $settings['host'];
     $db = $settings['database'];
     echo "<h1>Tables for database: ", $db, "</h1>";
-    echo "    <table border=\"true\">";
+    echo "    <table border=\"1\">";
     $user = $settings['user'];
     $pass = $settings['password'];
     $charset = 'utf8mb4';
