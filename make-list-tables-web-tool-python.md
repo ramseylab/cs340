@@ -1,3 +1,4 @@
+# How to set up a basic Flask application that queries MySQL
 
 In all of the steps below, `ramseyst` should be understood to
 represent your ONID username.
