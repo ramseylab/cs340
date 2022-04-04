@@ -26,7 +26,7 @@ def get_tables():
     for [table_name] in cursor.fetchall():
         res_html += f"<tr><td>{table_name}</td></tr>\n"
     res_html += "</table>\n"
-    res_html += "<img src=\"/static/logo.ong\" />\n</body>\n</html>\n"
+    res_html += "<img src=\"/static/logo.png\" />\n</body>\n</html>\n"
     return res_html
 ##get_tables = webapp.route('/')(get_tables)
 
