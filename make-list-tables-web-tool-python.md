@@ -189,7 +189,6 @@ look something like this:
 18612 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
 18614 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
 18615 ?        S      0:00  \_ /nfs/stak/users/ramseyst/venv/bin/python3 /nfs/stak/users/ramseyst/venv/bin/gunicorn -w 4 -b 0.0.0.0:
-[
 ```
 Kill the parent process (the top-level one shown, which has PID 18605 in this case)
 using `kill -9`.
