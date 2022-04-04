@@ -1,5 +1,10 @@
 # How to set up a basic Flask application that queries MySQL
 
+In this tutorial, I'll show you how to set up a toy Python/Flask
+web application that will query your CS340 MariaDB database
+to get the list of tables in the database, and to display the
+list in an HTML table.
+
 In all of the steps below, `ramseyst` should be understood to
 represent your ONID username.
 
