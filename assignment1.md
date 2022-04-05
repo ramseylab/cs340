@@ -86,7 +86,7 @@ exit
 Now ssh back into`access.engr.oregonstate.edu`; you should no longer be challenged for
 a password when you do so:
 ```
-ssh ramseyst@access.engr.oregonstate.edu`
+ssh ramseyst@access.engr.oregonstate.edu
 ```
 but you will still be asked to specify a terminal type (just accept the default).
 At this point, on the remote server, you will want to make a directory for this assignment and change
