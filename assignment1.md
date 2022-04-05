@@ -57,7 +57,7 @@ ls -alh ~/.ssh
 ```
 Then copy the `~/.ssh/id_rsa.pub` file to T.E.A.C.H. like this:
 ```
-scp ~/.ssh/id_rsa.pub ramseyst@access.engr.oregonstate.edu:.ssh/id_rsa.pub
+scp ~/.ssh/id_rsa.pub ramseyst@access.engr.oregonstate.edu:
 ```
 you'll have to authenticate using a password and 2FA using "Duo push". 
 To get signed up for 2FA using Duo, visit [beav.es/duo](https://beav.es/duo).
@@ -73,6 +73,8 @@ Now in the remote session, install your RSA public key file into
 `~/.ssh/authorized_keys` and clean up the file that you no longer need:
 
 ```
+mkdir -p .ssh
+chmod 700 .ssh
 cat id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 rm -f id_rsa.pub
