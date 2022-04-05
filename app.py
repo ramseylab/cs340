@@ -6,7 +6,7 @@ def read_mysql_config(mysql_config_file_name: str):
         config_info = dict()
         for line in mysql_conf.readlines():
             if line.startswith('['): continue
-            config_info.update(dict([(substr.split()[0] for substr in line.split('='))]))
+            config_info.update(dict([(substr.strip() for substr in line.split('='))]))
     return config_info
 
 config_info = read_mysql_config("../.my.cnf")
