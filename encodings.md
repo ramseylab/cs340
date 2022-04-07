@@ -8,7 +8,7 @@ There are two ways to do this. To do this using the `mysql` command-line
 tool (which is convenient if you are outside of OSU since you don't have
 to use a VPN), you would ssh into `acess.engr.oregonstate.edu`
 ```
-ssh ramseyset@access.engr.oregonstate.edu
+ssh ramseyst@access.engr.oregonstate.edu
 ```
 and then (assuming your `.my.cnf` file is already set up as in Assignment&nbsp;1) 
 you would run this command:
