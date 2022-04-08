@@ -74,6 +74,11 @@ to your `~/.cshrc` file:
 set backslash_quote
 alias mysql mysql "--init-command=\"set character_set_server='utf8mb4';\""
 ```
+or, if you are using the `bash` shell, adding these two lines to your `~/.bashrc`
+file:
+```
+alias mysql="mysql --init-command=\"set character_set_server='utf8mb4';\""
+```
 and then logging out and then back in. Next, be sure to do this exactly as shown:
 ```
 mysql
