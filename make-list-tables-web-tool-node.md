@@ -114,7 +114,7 @@ hello-world@1.0.0 /nfs/stak/users/ramseyst
 We will also need the `node-ini` package, so that we can read the `.my.cnf` file
 from your Node.js application,
 ```
-npm install node-ini
+/bin/npm install node-ini
 ```
 which should print the following to the terminal session,
 ```
@@ -134,7 +134,7 @@ parameters under which it is running.) So, to enable your Node.js application
 to parse an argument from the command-line, you'll need to install the 
 `process.argv` pcakage,
 ```
-npm install process.argv
+/bin/npm install process.argv
 ```
 which should display the following text to the terminal session,
 ```
@@ -290,7 +290,7 @@ in JavaScript Object Notation (JSON) format. This file would be called
 `package.json` and it would live in your `cs340-node` subdirectory.
 To create the file, just type
 ```
-npm init -y
+/bin/npm init -y
 ```
 You'll see that your resulting `package.json` will look like this:
 ```
@@ -318,7 +318,7 @@ Then, if you commit that `package.json` file to your project source code
 repository, the next time you want to install your Node.js packages for
 a new deployment on some server, you could just use the command
 ```
-npm install
+/bin/npm install
 ```
 and it will auto-detect the `package.json` file and install the four
 package dependencies specified in the `package.json` file.
