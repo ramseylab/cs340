@@ -31,7 +31,7 @@ var port = process.argv[2];
 // configure static routing for the '/static/' subdirectory
 app.use('/static', express.static('static'));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { // the arrow notation means: function(req, res) { ...
     var pool = req.app.get('mysql');
     mysql_pool.query('show tables;',   // could opt to use a setting on `app` instead of a module variable
                function(error, results, fields) {
