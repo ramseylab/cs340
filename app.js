@@ -39,7 +39,7 @@ app.get('/', (req, res) => { // the arrow notation means: function(req, res) { .
                        res.write(JSON.stringify(error));
                        res.end();
                    }
-                   var table_names = results.map(obj => Object.keys(obj).map(k => obj[k])[0]);
+                   let table_names = results.map(obj => Object.keys(obj).map(k => obj[k])[0]);
                    /* The following line of code is nicer, but only can be used if you are using ES2017 or newer: */
 //                 var table_names = results.map(obj => Object.values(obj)[0]);
                    res.write("<html>\n<body>\n<h1>Tables in my CS340 database:</h1>\n<table border=\"1\">\n");
@@ -53,6 +53,7 @@ app.get('/', (req, res) => { // the arrow notation means: function(req, res) { .
 // start the Node.js webserver
 app.listen(port, () => {
   // note, for a string delimited with backticks, there is variable 
-  // interpolation within the string
-  console.log(`Example app listening on port ${port}`);
+    // interpolation within the string
+    let pid = require('process').pid;
+    console.log(`Example app listening on port ${port}; PID: ${pid}`);
 });
