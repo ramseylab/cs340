@@ -275,3 +275,41 @@ Node.js app, instead of `N`. It should display a list of tables, in HTML
 </body>
 </html>
 ```
+Instead of having to manually install packages using `npm install`, you
+could use a file that describes your application's Node.js package dependencies,
+in JavaScript Object Notation (JSON) format. This file would be called 
+`package.json` and it would live in your `cs340-node` subdirectory.
+To create the file, just type
+```
+npm init -y
+```
+You'll see that your resulting `package.json` will look like this:
+```
+{
+  "name": "cs340-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql": "^2.18.1",
+    "node-ini": "^1.0.0",
+    "process.argv": "^0.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+Then, if you commit that `package.json` file to your project source code 
+repository, the next time you want to install your Node.js packages for
+a new deployment on some server, you could just use the command
+```
+npm install
+```
+and it will auto-detect the `package.json` file and install the four
+package dependencies specified in the `package.json` file.
