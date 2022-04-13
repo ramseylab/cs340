@@ -174,20 +174,20 @@ emacs -nw app.js
 and let's paste the following code in there:
 ```
 // load the "node-ini" module and assign it to variable "ini"
-var ini = require('node-ini');
+let ini = require('node-ini');
 
 // parse the MySQL client configuration file, ~/.my.cnf 
 // and extract the configuration info under the "client" key
-var mysql_config = ini.parseSync('../.my.cnf').client;
+let mysql_config = ini.parseSync('../.my.cnf').client;
 
 // load the "mysql" module 
-var mysql = require('mysql');
+let mysql = require('mysql');
 
 // create a MySQL connection pool object using the
 // database server hostname, database username, 
 // database user password, and database name specified
 // in the MySQL client configuration file
-var mysql_pool = mysql.createPool({
+let mysql_pool = mysql.createPool({
     connectionLimit : 10,
     host            : mysql_config.host,
     user            : mysql_config.user,
@@ -195,19 +195,19 @@ var mysql_pool = mysql.createPool({
     database        : mysql_config.database});
 
 // load the "express" module
-var express = require('express');
+let express = require('express');
 
 // create the Express application object
-var app = express();
+let app = express();
 
 // get the TCP port number from the ccommandline
-var port = process.argv[2];
+let port = process.argv[2];
 
 // configure static routing for the '/static/' subdirectory
 app.use('/static', express.static('static'));
 
 app.get('/', (req, res) => { // the arrow notation means: function(req, res) { ...
-    var pool = req.app.get('mysql');
+    let pool = req.app.get('mysql');
     mysql_pool.query('show tables;',   // could opt to use a setting on `app` instead of a module variable
                function(error, results, fields) {
                    if (error) {
@@ -216,7 +216,7 @@ app.get('/', (req, res) => { // the arrow notation means: function(req, res) { .
                    }
                    let table_names = results.map(obj => Object.keys(obj).map(k => obj[k])[0]);
                    /* The following line of code is nicer, but only can be used if you are using ES2017 or newer: */
-//                 var table_names = results.map(obj => Object.values(obj)[0]);
+//                 let table_names = results.map(obj => Object.values(obj)[0]);
                    res.write("<html>\n<body>\n<h1>Tables in my CS340 database:</h1>\n<table border=\"1\">\n");
                    table_names.map(table_name => res.write(`<tr><td>${table_name}</td></tr>\n`));
 		   res.write("</table>\n");
