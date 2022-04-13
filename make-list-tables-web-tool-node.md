@@ -176,15 +176,15 @@ and let's paste the following code in there:
 // load the "node-ini" module and assign it to variable "ini"
 var ini = require('node-ini');
 
-// parse the MySQL client configuration file, ~/.my.cnf
+// parse the MySQL client configuration file, ~/.my.cnf 
 // and extract the configuration info under the "client" key
 var mysql_config = ini.parseSync('../.my.cnf').client;
 
-// load the "mysql" module
+// load the "mysql" module 
 var mysql = require('mysql');
 
 // create a MySQL connection pool object using the
-// database server hostname, database username,
+// database server hostname, database username, 
 // database user password, and database name specified
 // in the MySQL client configuration file
 var mysql_pool = mysql.createPool({
@@ -206,30 +206,31 @@ var port = process.argv[2];
 // configure static routing for the '/static/' subdirectory
 app.use('/static', express.static('static'));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { // the arrow notation means: function(req, res) { ...
     var pool = req.app.get('mysql');
     mysql_pool.query('show tables;',   // could opt to use a setting on `app` instead of a module variable
-	       function(error, results, fields) {
+               function(error, results, fields) {
                    if (error) {
-		       res.write(JSON.stringify(error));
-		       res.end();
+                       res.write(JSON.stringify(error));
+                       res.end();
                    }
-                   var table_names = results.map(obj => Object.keys(obj).map(k => obj[k])[0]);
+                   let table_names = results.map(obj => Object.keys(obj).map(k => obj[k])[0]);
                    /* The following line of code is nicer, but only can be used if you are using ES2017 or newer: */
 //                 var table_names = results.map(obj => Object.values(obj)[0]);
                    res.write("<html>\n<body>\n<h1>Tables in my CS340 database:</h1>\n<table border=\"1\">\n");
                    table_names.map(table_name => res.write(`<tr><td>${table_name}</td></tr>\n`));
-                   res.write("</table>\n");
+		   res.write("</table>\n");
                    res.write("<img src=\"static/logo.png\" />\n</body>\n</html>\n");
-                   res.end();
-	       });
+		   res.end();
+    	       });
 });
 
 // start the Node.js webserver
 app.listen(port, () => {
-  // note, for a string delimited with backticks, there is variable
-  // interpolation within the string
-  console.log(`Example app listening on port ${port}`);
+  // note, for a string delimited with backticks, there is variable 
+    // interpolation within the string
+    let pid = require('process').pid;
+    console.log(`Example app listening on port ${port}; PID: ${pid}`);
 });
 ```
 Alternatively, if you don't want to paste in all that code, you can get it from 
@@ -250,8 +251,9 @@ node app.js 65521
 ```
 It should print the following to the terminal session:
 ```
-Example app listening on port 65521
+Example app listening on port 65521; PID: 23180
 ```
+(Note, PID means process identifier, and yours will be different from 23180).
 Now, with your web browser (making sure that if you are off campus, you are
 logged into the campus VPN on the device on which you are using your web browser),
 navigate to `http://flipN.engr.oregonstate.edu:65521`, substituting of course
@@ -275,6 +277,13 @@ Node.js app, instead of `N`. It should display a list of tables, in HTML
 </body>
 </html>
 ```
+Note, with the simple Node.js / Express application setup that we are using
+here, HTTPS is not supported. So you can't use 
+`https://flipN.engr.oregonstate.edu:PORT`, you must use HTTP. For
+information on how to set up HTTPS in Node.js, see 
+the [Node.js documentation page on HTTPS](https://nodejs.org/api/https.html).
+
+## Using `package.json`
 Instead of having to manually install packages using `npm install`, you
 could use a file that describes your application's Node.js package dependencies,
 in JavaScript Object Notation (JSON) format. This file would be called 
@@ -313,3 +322,22 @@ npm install
 ```
 and it will auto-detect the `package.json` file and install the four
 package dependencies specified in the `package.json` file.
+
+To turn off your Node.js application, just issue a SIGINT (`Ctrl-C`)
+to the application in the terminal window. To run your Node.js application
+in the background and have it keep running even after you log out,
+normally we would use the Linux systemd framework, but that would require
+superuser access so that we could add a script to `/etc/systemd/system`.
+So instead, we can use a crude workaround, `nohup`:
+```
+nohup node app.js 65521 &
+```
+When you try that, it will print out the process ID (PID); make a note of it
+(let's suppose it is 23180). 
+Then log out of the terminal session, and your app
+should still be running. To kill it, you can reference the process ID:
+```
+kill -9 23180
+```
+
+
