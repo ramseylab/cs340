@@ -207,7 +207,6 @@ let port = process.argv[2];
 app.use('/static', express.static('static'));
 
 app.get('/', (req, res) => { // the arrow notation means: function(req, res) { ...
-    let pool = req.app.get('mysql');
     mysql_pool.query('show tables;',   // could opt to use a setting on `app` instead of a module variable
                function(error, results, fields) {
                    if (error) {
