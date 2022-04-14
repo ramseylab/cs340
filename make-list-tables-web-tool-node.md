@@ -32,8 +32,30 @@ Next, `cd` inside that directory
 ```
 cd cs340-node
 ```
-Now, let's install the `mysql` package for Node.js. To do that, we'll use a
-command called `npm`, like this:
+Now, let's set up the Node.js Package Manager (NPM)
+to install packages in the local directory. Do this:
+```
+/bin/npm init -y
+```
+It should print out this:
+```
+Wrote to /nfs/stak/users/ramseyst/cs340-node/package.json:
+
+{
+  "name": "cs340-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+Now, let's install the `mysql` package for Node.js. We'll again use the
+`npm` command, like this:
 ```
 /bin/npm install mysql
 ```
