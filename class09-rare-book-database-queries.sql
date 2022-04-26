@@ -96,7 +96,7 @@ select zip_postcode, last_name, first_name from customer order by last_name, zip
 
 # For example, what if you uwant to find all books ordered on sale number 6?
 
-select isbn from volume where sale_id = 6;
+select isbn, sale_id from volume where sale_id = 6;
 
 # Find sales for which sale_total_amt was greater than 100.00
 
@@ -120,11 +120,11 @@ select * from sale where sale_total_amt > 100.00 and sale_date < '2021-07-01';
 
 # What if you want only seles that occurred only in July 2021?  Use the `between` operator:
 
-select * from sale where sale_date between '2021-07-01' and '2021-07-31';
+select count(*) from sale where sale_date between '2021-07-01' and '2021-07-31';
 
 # Or equivalently using an explicit conjunction:
 
-select * from sale where sale_date >= '2021-07-01' and sale_date <= '2021-07-31';
+select count(*) from sale where sale_date >= '2021-07-01' and sale_date <= '2021-07-31';
 
 # If you want sales within the last nine months, use the `curdate` function
 # and the `interval` keyword, like this:
@@ -147,7 +147,7 @@ select * from sale where sale_date >= str_to_date('07-10-2021', '%m-%d-%Y');
 # note the uppercase Y, that is important or the query won't work properly but won't give you an error either!
 
 # To have a full Boolean algebra for predicates, we of course need a NOT operator. In SQL, it is the
-# keyword `not`. Let's find rows of `volume` where the asking price is greater than 50 or the selling
+# keyword `not`. Let us find rows of `volume` where the asking price is greater than 50 or the selling
 # price is greater than or equal to the asking price:
 
 select * from volume where asking_price > 50.00 or selling_price >= asking_price;
