@@ -130,6 +130,7 @@ select count(*) from sale where sale_date >= '2021-07-01' and sale_date <= '2021
 # and the `interval` keyword, like this:
 
 select * from sale where sale_date >= curdate() - interval 9 month;
+# curdate() := date(now())
 
 # What if we wanted a list of sales that were either high-dollar-value (over 500.00) or with
 # exp_year 15, perhaps for a fraud alert type of filter?  Use the `or` operator:
@@ -197,14 +198,16 @@ select not ( ( 0=1 ) and 0=1 );
 
 select * from customer where first_name like 'J%';
 
-# What if we just want to match John and Jane?
+# What if we just want to match John and Joan?
 # Use the single-character wildcard, `_`
 
-select * from customer where first_name like 'J_ne';
+select * from customer where first_name like 'Jo_n';
 
-# What if we instead want to _exclude_ John and Jane?
+# (note: there isnot a Joan in the database, sorry)
 
-select * from customer where first_name not like 'J_ne';
+# What if we instead want to _exclude_ John and Joan?
+
+select * from customer where first_name not like 'Jo_n';
 
 # What if we want to match Jane and Janice?
 # You can do this using `regexp`, and using the `+` operator:
@@ -252,5 +255,13 @@ select NULL is UNKNOWN;
 # Try it again with equals:
 
 select NULL = NULL;
+
+# How can we find which volumes have not yet been sold?
+
+select inventory_id, isbn, selling_price from volume where selling_price is NULL;
+
+select inventory_id, isbn from volume where selling_price is NULL;
+
+
 
 
