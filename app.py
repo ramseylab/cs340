@@ -1,13 +1,13 @@
 import MySQLdb
 import flask
+import configparser
+
 
 def read_mysql_config(mysql_config_file_name: str):
-    with open(mysql_config_file_name, "r") as mysql_conf:
-        config_info = dict()
-        for line in mysql_conf.readlines():
-            if line.startswith('['): continue
-            config_info.update(dict([(substr.strip() for substr in line.split('='))]))
-    return config_info
+    config = configparser.ConfigParser()
+    config.read(mysql_config_file_name)
+    return dict(config['client'])
+
 
 config_info = read_mysql_config("../.my.cnf")
 
