@@ -225,6 +225,22 @@ join actor using (actor_id) where last_name = 'FAWCETT' and first_name = 'JULIA'
 group by category_id) as foo using (category_id)
 order by count desc;
 
+-- what if we need to show only the categories for which the count is less than 3?
+-- we can post-filter using "having"
+
+select name, ifnull(c, 0) as count
+from category
+left join
+(select category_id, count(*) as c
+from film_category 
+join film using (film_id)
+join film_actor using (film_id)
+join actor using (actor_id) where last_name = 'FAWCETT' and first_name = 'JULIA'
+group by category_id) as foo using (category_id)
+having count < 3 
+order by count desc;
+
+
 -- What if we needed to know the actor_id, first_name, and last_name for all
 -- actors who have *never* acted in a Children's film?
 
