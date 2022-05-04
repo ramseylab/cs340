@@ -269,6 +269,22 @@ where category.name = 'Children')
 order by actor_id
 limit 30;
 
+
+-- Can we do it with a CTE?  Sure
+with
+aids as (select distinct actor_id
+         from film_actor
+         join film_category using (film_id)
+         join category using (category_id)
+         where category.name = 'Children')
+         select distinct actor_id, first_name, last_name
+         from actor
+         join film_actor using (actor_id)
+         where actor_id not in (select actor_id from aids)
+         order by actor_id
+         limit 30;
+
+
 -- What if we need the actor_id, first_name, last_name, and maximum film
 -- length of Childrens films for every actor?
 
