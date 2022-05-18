@@ -1,3 +1,8 @@
+# This Python module is a flask application that demonstrates how to set up
+# a page that allows the user to select two entities of types that are connected
+# by a many-to-many relationship (in this case, an actor and a film) and to
+# "associate them" using an insert into the linker (i.e., composite entity) table.
+#
 # run like this: FLASK_APP="class16.py" python -m flask run -h 0.0.0.0 -p 6502
 # access like this: http://localhost:6502/
 
