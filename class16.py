@@ -15,9 +15,9 @@ def read_config_section(config_file_name: str,
     return dict(config[section if section is not None else 'client'])
 
 
-mysql_config = read_config_section(os.path.join(os.path.expanduser("~"),
-                                                ".my.cnf"),
-                                   'client_local')
+## please replace ONID_USERNAME with your ONID username
+mysql_config = read_config_section('/nfs/stak/users/ONID_USERNAME/.my.cnf',
+                                   'client')
 
 db_conn = MySQLdb.connect(*[mysql_config[k]
                             for k in ['host', 'user', 'password', 'database']])
