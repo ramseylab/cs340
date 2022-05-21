@@ -73,6 +73,7 @@ def associate_actor_to_film_func(actor_id, film_id):
     if num_rows > 0:
         return f"<html><body>Actor ID {actor_id} and film ID {film_id} are already associated in the database; <a href=\"/\">return</a></body></html>"
     cursor.execute('insert into film_actor (actor_id, film_id) values (%s, %s);', [actor_id, film_id])
+    db_conn.commit()
     return f"<html><body>Actor ID {actor_id} and film ID {film_id} are now associated in the database; <a href=\"/\">return</a></body></html>"
 
 
