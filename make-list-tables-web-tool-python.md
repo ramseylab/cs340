@@ -177,7 +177,7 @@ pip install gunicorn
 ```
 Then (making sure that your current working directory is `~/cs340-flask`), run
 ```
-~/venv/bin/gunicorn -w 4 -b 0.0.0.0:NNN -D app:webapp
+~/venv/bin/gunicorn -w 1 -b 0.0.0.0:NNN -D app:webapp
 ```
 and it will run in the background. To shut it down, use
 `ps axwf | less` and look for your specific TCP port number; it will
