@@ -65,29 +65,30 @@ curl -L -s https://raw.githubusercontent.com/ramseylab/cs340/main/logo.png > sta
 ```
 Now, use your favorite text editor to create a file `app.py`,
 ```
-import MySQLdb
-import flask
-import configparser
+import MySQLdb, flask, configparser, os
 
-
-def read_mysql_config(mysql_config_file_name: str):
+def read_config_section(config_file_name: str,
+                        section: str) -> dict:
     config = configparser.ConfigParser()
-    config.read(mysql_config_file_name)
-    return dict(config['client'])
+    config.read(config_file_name)
+    return dict(config[section if section is not None else 'client'])
 
-config_info = read_mysql_config("../.my.cnf")
 
-db_conn = MySQLdb.connect(config_info['host'],
-                          config_info['user'],
-                          config_info['password'],
-                          config_info['database'])
+config_info = read_config_section(os.path.join(os.path.expanduser("~"), ".my.cnf"),
+                                   'client')
+
+config_info_list = [config_info[k] for k in ['host', 'user', 'password', 'database']]
+
+def db_conn():
+   return MySQLdb.connect(*config_info_list)
+
 
 webapp = flask.Flask(__name__, static_url_path='/static')
 
 @webapp.route('/')
 def get_tables():
     res_html = "<html>\n<body>\n<table border=\"1\">\n"
-    cursor = db_conn.cursor()
+    cursor = db_conn().cursor()
     cursor.execute('show tables;', ())
     for [table_name] in cursor.fetchall():
         res_html += f"<tr><td>{table_name}</td></tr>\n"
